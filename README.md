@@ -1,5 +1,7 @@
 # Functional Scala for Data Engineers
 
+Travis-CI [![Build Status](https://travis-ci.org/pmcollins757/scala-class.svg?branch=master)](https://travis-ci.org/pmcollins757/scala-class)
+
 A fast-paced introduction to Scala's FP ecosystem for data engineers. 
 
 These slides loosely follow Chiusano and Bjarnason's [Functional Programming in Scala](https://www.manning.com/books/functional-programming-in-scala) with an emphasis on introducing Cats and various other FP libraries. Please read chapters 1-3 before beginning.
