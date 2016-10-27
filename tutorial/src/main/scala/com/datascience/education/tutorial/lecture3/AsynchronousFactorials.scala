@@ -48,7 +48,7 @@ object FactorialWriter {
 
   // Task (1a)
 
-  // type Logged[A] = ???
+  type Logged[A] = Writer[L, A]
 
   // Task (1b)
   // def factorial(n: Int): ??? = ???

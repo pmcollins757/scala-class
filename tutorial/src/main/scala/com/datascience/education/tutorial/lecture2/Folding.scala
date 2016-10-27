@@ -136,7 +136,7 @@ object Folding {
     val tuple: (Double, Int) =
       list.foldLeft[(Double,Int)]((0.0, 0)){
         case ((sum: Double, count: Int), next: Double) =>
-          ???
+          (sum + next, count + 1)
       }
 
     tuple._1 / tuple._2
@@ -149,15 +149,15 @@ object Folding {
 
   // TASK 3b
 
-  def contains[A](list: List[A], item: A): Boolean =
-    list.foldLeft(???)(???)
-
+  def contains[A](list: List[A], item: A): Boolean = list.foldLeft(false)((acc, next) =>
+    acc || (next == item))
+  
 
   // contains(List(1,2,3,4),4)
 
 
   //  TASK 3c
-  def last[A](list: List[A]): A = list.foldLeft[A](???)(???)
+  def last[A](list: List[A]): A = list.foldLeft(list.head)((acc, A) => A)
 
 
 
@@ -166,8 +166,8 @@ object Folding {
 
 
   // TASK 3d
-  def penultimate[A](list: List[A]): A = ???
-    // list.foldLeft( (???, ???) )((???, ???) => ??? )//???
+  def penultimate[A](list: List[A]): A =
+    list.foldLeft[(A, A)]( (list.head, list.tail.head) )((acc, next) =>  (acc._2, next))._1
 
   // List(1,2,3,4).tail.head // hint- use (list.head, list.tail.head)  as the initial value
   // val a = (2,3)
@@ -176,30 +176,57 @@ object Folding {
 
 
   // TASK 3e
-  def average3(list: List[Double]): Double = ???
-    // list match {
+  def average3(list: List[Double]): Double = {
+    if (list.isEmpty) Double.NaN
+    else (
+        list.foldLeft[(Double, Int)]((0.0,0)){
+          case((cma: Double, count: Int), next: Double) => {
+            ( (cma + (next - cma)/(count + 1)), count + 1 ) }
+        }._1
+    )
+  }
+
+
+  // list match {
     //    ???
     // }
-  
   // average3(List(1,2,3,4))
 
 
   // TASK 3f
   def kthLast[A](l: List[A], k: Int) = {
-    ???
-    l.foldRight(???)(???)//.???
+    l.foldRight[List[A]](List()){
+      (next, acc) => {
+        if (acc.length < k) (next::acc)
+        else acc
+      }
+    }.head
   }
+
+  //First try at kthlast:
+  // def kthLast[A](l: List[A], k: Int) = {
+  //   l.foldRight[(List[A], Int)]((List(), 0)){
+  //     case(next, (acc, count: Int)) => {
+  //       ( if (count < k) (next::acc, count + 1)
+  //       else (acc, count)
+  //       )
+  //     }
+  //   }._1.head
+  // }
+
+
 
   // kthLast(l,2)
 
   // TASK 3g
   def passThrough[A](list: List[A]): List[A] =
-    ???
+    list.foldRight[List[A]](List())( (next, acc) => next::acc )
+
 
   // TASK 3h
   //curly braces are ok for function literals
   def mapViaFoldLeft[A,B](list: List[A], f: A => B): List[B] =
-    ???
+    list.foldRight[List[B]](List())( (next, acc) => f(next)::acc )
 
   val l3 = (0 to 5).toList
 

@@ -2,7 +2,7 @@ package com.datascience.education.tutorial.lecture1
 
 import scala.language.implicitConversions
 
-object Hierarchy extends App {
+object Hierarchy { //extends App {
 
   import org.json4s._
   import org.json4s.native.JsonMethods._
