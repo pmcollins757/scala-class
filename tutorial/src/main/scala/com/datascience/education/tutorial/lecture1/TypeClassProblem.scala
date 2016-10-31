@@ -8,7 +8,7 @@ object ModelProblem {
   trait Plottable[Domain, Range, T[Domain, Range]] {
     // The `= ???` is necessary to prevent compiler error; but this should be abstract!
     // Remove `= ???` upon implementation of the signature of `points`
-    def points(t : T) = ???
+//    def points(t : T) = ???
 
 
     def plot(name: String, t: T[Domain, Range], input: List[Domain]): Unit = {
