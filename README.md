@@ -1,6 +1,6 @@
 # Functional Scala for Data Engineers
 
-Travis-CI [![Build Status](https://travis-ci.org/pmcollins757/scala-class.svg?branch=master)](https://travis-ci.org/pmcollins757/scala-class)
+Travis-CI:  [![Build Status](https://travis-ci.org/pmcollins757/scala-class.svg?branch=master)](https://travis-ci.org/pmcollins757/scala-class)
 
 A fast-paced introduction to Scala's FP ecosystem for data engineers. 
 
