@@ -1,5 +1,9 @@
 package com.datascience.education.tutorial.lecture3
-
+import cats._
+import cats.data._
+import cats.implicits._
+import cats.instances._
+import cats.instances.all._
 
 import cats.data.Reader
 import cats.syntax.applicative._
@@ -70,11 +74,13 @@ object DatabaseQueriesAndUpdates {
   type DatabaseReader[B] = Reader[Database, B]
 
   // Task 2b
-  //def findUsername(userId: Int): DatabaseReader[String] = DatabaseReader[users(userId)]
+  def findUsername(userId: Int): DatabaseReader[String] = DatabaseReader(users(userId))
 
 
   // Task 2c
-//  def findUserId(username: String): DatabaseReader[Int] = DatabaseReader[] 
+  // def findUserId(username: String): DatabaseReader[Int] = DatabaseReader({
+  //   users.find(_._2 == username).get._1
+  // })
 
   // Task 2d
   // def userExists(username: String): ??? = ???

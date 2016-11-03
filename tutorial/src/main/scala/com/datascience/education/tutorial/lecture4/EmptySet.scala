@@ -1,4 +1,4 @@
-package com.datascience.education.tutorial.lecture4
+//package com.datascience.education.tutorial.lecture4
 
 
 object EmptySet {
@@ -16,19 +16,26 @@ object EmptySet {
 
 
 
-  // Task (1a)
-  def sum(l: List[Int]): Option[Int] = ???
+  //Task (1a)
+  def sum(l: List[Int]): Option[Int] = l match {
+    case Nil => None
+    case x :: xs =>  sum(xs).map(_ + x).orElse(Some(x))
+  }
+  
 
   // Task (1b)
-  def product(l: List[Double]): Option[Double] = ???
+  def product(l: List[Double]): Option[Double] = l match {
+    case Nil => None
+    case x :: xs => product(xs).map( _ * x).orElse(Some(x))
+  }
 
 
   // Task (1c)
-  def sum2(l: List[Int]): Option[Int] = ???
+  def sum2(l: List[Int]): Option[Int] = Option(l.foldRight(0)(_ + _))
 
   // Task (1d)
 
-  def product2(l: List[Double]): Option[Double] = ???
+  def product2(l: List[Double]): Option[Double] = Option(l.foldRight(1.0)(_ * _))
 
 
 }
