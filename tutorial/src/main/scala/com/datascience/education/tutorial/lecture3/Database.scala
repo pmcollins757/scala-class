@@ -2,8 +2,8 @@ package com.datascience.education.tutorial.lecture3
 import cats._
 import cats.data._
 import cats.implicits._
-import cats.instances._
-import cats.instances.all._
+//import cats.instances._
+//import cats.instances.all._
 
 import cats.data.Reader
 import cats.syntax.applicative._
