@@ -74,7 +74,7 @@ object DatabaseQueriesAndUpdates {
   type DatabaseReader[B] = Reader[Database, B]
 
   // Task 2b
-  def findUsername(userId: Int): DatabaseReader[String] = DatabaseReader(users(userId))
+ // def findUsername(userId: Int): DatabaseReader[String] = DatabaseReader(users(userId))
 
 
   // Task 2c
