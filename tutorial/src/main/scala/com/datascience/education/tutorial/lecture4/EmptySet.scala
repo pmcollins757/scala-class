@@ -31,7 +31,7 @@ object EmptySet {
 
 
   // Task (1c)
-  def sum2(l: List[Int]): Option[Int] = l.foldRight(l.headOption.map(x => 0))( (iter, acc) => acc.map(_ + iter ))
+  def sum2(l: List[Int]): Option[Int] = l.foldRight(l.headOption.map(x => 0))((iter, acc) => acc.map(_ + iter ))
 
   // Task (1d)
   def product2(l: List[Double]): Option[Double] = l.foldRight(l.headOption.map { x => 1.0 })( (iter, acc) => acc.map(_ * iter) )
@@ -40,7 +40,7 @@ object EmptySet {
 
 
 object EmptySetExamples extends App {
-
+//  def main(args: Array[String]): Unit = {
   import EmptySet._
 
   val nums = (1 to 10).toList
@@ -98,6 +98,6 @@ object EmptySetExamples extends App {
   println(s"product of $emptyDouble")
   println(dFoldedEmpty)
 
-
+//  }
 
 }
