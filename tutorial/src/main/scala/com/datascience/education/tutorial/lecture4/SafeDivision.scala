@@ -13,8 +13,19 @@ import cats.std.list._
 object SafeDivision {
 
   // Task (2a)
+  //safeDiv should catch division by zero and results that are NaN, positive infinity, or negative infinity.
+  //Use methods defined on Java's Double class to determine these last three conditions.
+
+
   def safeDiv(x: Int, y: Int): Option[Double] =
-    ???
+    try {
+      val z = x/y.toDouble
+      if (z.isNaN || z.isInfinite) None: Option[Double]
+      else Some(z)
+    }
+    catch {
+      case e: ArithmeticException => None: Option[Double]
+    }
 
   def divTuple(tup: (Int, Int)): Option[Double] =
     safeDiv(tup._1, tup._2)
@@ -24,12 +35,29 @@ object SafeDivision {
   
   // Task (2b)
   def traverseFractions(ll: List[(Int, Int)]): Option[List[Double]] = 
-    ???
+    traverse(ll)(x => divTuple(x))
 
 
   // Task (2c)
-  def traverseSqrtFractions(ll: List[(Int, Int)]): Option[List[Double]] =
-    ???
+  def safeSqrt(tup: (Int, Int)): Option[Double] = {
+    val sqrtx = divTuple(tup).map(x => math.sqrt(x))
+    if (sqrtx == None) None: Option[Double]
+    else if (sqrtx.map(x => x.isNaN).contains(true)) None: Option[Double]
+    else sqrtx
+  }
+
+  def traverseSqrtFractions(ll: List[(Int, Int)]): Option[List[Double]] = {
+    traverse(ll)(x => safeSqrt(x))
+
+    //This line will perform the traverseSqrtFractions, but returns NaN while we want to return None for a NaN:
+    //traverseFractions(ll).map(aa => aa.map(math.sqrt(_)))
+
+    //This removes NaN instead returning a None:
+    //val mixed = traverseFractions(ll).map(aa => aa.map(math.sqrt(_)))
+    //mixed.map(ld => ld.filter(x => !x.isNaN))
+  }
+
+
 
 }
 
@@ -84,6 +112,14 @@ object SafeDivisionTraversalExamples extends App {
   println("Square root of fractions using `traverse`: ")
   println("These fractions do not include an undefined number and should succeed")
   println(optionSqrt2)
+
+  val p = List(-6, 1, 2, -3, 5)
+  val q = (1 to 6).toList
+  val fracsNaN: List[Tuple2[Int, Int]] = p.zip(q)
+
+  val optionSqrt3: Option[List[Double]] = traverseSqrtFractions(fracsNaN)
+  println("Square root of fractions with negative numerators: ")
+  println(optionSqrt3)
 
 }
 
