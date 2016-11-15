@@ -32,7 +32,7 @@ object Employees  {
 
   // Task (3a)
   def employeeEmail(id: UUID): Option[Email] =
-    ???
+    employees.get(id).map(x => x.email)
 
 }
 
