@@ -473,6 +473,7 @@ This Part has demonstrated that variance and type bounds often go hand-in-hand.
 ## Part 5: Covariance and Type Bounds in `Option`; `Option` Combinators
 
 `tutorial/src/test/scala/com/datascience/education/tutorial/lecture4/FlawedOptionSpec.scala`
+
 `tutorial/src/main/scala/com/datascience/education/tutorial/lecture4/FPOption.scala`
 
 <b>Part 4: Covariance and Type Bounds in `List`</b> iterated through several incorrect implementations of `List` to approximate the version in the Scala Collections.
