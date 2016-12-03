@@ -64,14 +64,27 @@ object SafeDivisionXor {
 
   // Task 2a
   def safeDivInt(numerator: Int, denominator: Int): Xor[Exception, Int] =
-    ???
+    Xor.catchOnly[ArithmeticException]{
+      numerator/denominator
+    }
 
 
 
   // Task 2b
-  def squareRootFrac(numerator: Int, denominator: Int):
-      Xor[Exception, Double] = ???
+  def squareRootFrac(numerator: Int, denominator: Int): Xor[Exception, Double] = {
+    safeDivInt(numerator, denominator).flatMap { _ =>
+      val squareRoot: Double = math.sqrt( numerator.toDouble / denominator )
 
+      if (squareRoot.isNaN) Xor.catchOnly[Exception]{throw new Exception}
+      else Xor.right(squareRoot)
+    }
+
+  }
+
+// def dontLike13(n: Int): Xor[String, Int] = {
+//  if (n == 13) Xor.left("not happy")
+//  else Xor.right(n) map times10
+//  }
 
   def squareRootFrac(tup: (Int, Int)): Xor[Exception, Double] =
     squareRootFrac(tup._1, tup._2)

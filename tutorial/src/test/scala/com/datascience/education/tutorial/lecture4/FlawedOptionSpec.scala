@@ -24,7 +24,7 @@ class FlawedOptionSpec extends FunSuite with Matchers {
         case class FlawedSome[A](get: A) extends FlawedOption[A]
         case object FlawedNone extends FlawedOption[Nothing]
       }
-    """ shouldNot compile
+   """ should compile
   }
 
 }

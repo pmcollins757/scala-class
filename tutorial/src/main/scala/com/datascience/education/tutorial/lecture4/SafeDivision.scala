@@ -40,9 +40,8 @@ object SafeDivision {
 
   // Task (2c)
   def safeSqrt(tup: (Int, Int)): Option[Double] = {
-    val sqrtx = divTuple(tup).map(x => math.sqrt(x))
-    if (sqrtx == None) None: Option[Double]
-    else if (sqrtx.map(x => x.isNaN).contains(true)) None: Option[Double]
+    val sqrtx = divTuple(tup) map (x => math.sqrt(x))
+    if (sqrtx.isEmpty || sqrtx.exists(x => x.isNaN)) None: Option[Double]
     else sqrtx
   }
 

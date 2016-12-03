@@ -15,6 +15,8 @@ lazy val root = project.in(file(".")).
     lab, labAnswer,
     tutorial, tutorialAnswer, tutorialCommon,
     misc, miscAnswer, miscCommon
+  ).settings(
+    onLoad in Global := { Command.process("project tutorial", _: State) } compose (onLoad in Global).value
   )
 
 lazy val common = (project in file("common")).

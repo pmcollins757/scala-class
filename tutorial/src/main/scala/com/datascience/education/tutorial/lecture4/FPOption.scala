@@ -10,19 +10,21 @@ import scala.{ None => _ }
 
 // Part (5b)
 
-sealed trait FPOption[A] {
+sealed trait FPOption[+A] {
   import FPOption._
 
-  // def map[B](f: A => B): FPOption[B] = this match {
-  //   case FPSome(a) => FPSome(f(a))
-  //   case FPNone => FPNone
-  // }
+   def map[B](f: A => B): FPOption[B] = this match {
+     case FPSome(a) => FPSome(f(a))
+     case FPNone => FPNone
+   }
 
-  // Part (5b)
-  // def getOrElse(default: => A): A = this match {
-  //   case FPSome(a) => a
-  //   case FPNone => default
-  // }
+  //Part (5b)
+  //From Option doc:
+  // final def getOrElse[B >: A](default: ⇒ B): B 
+   def getOrElse[B >: A](default: => B): B = this match {
+     case FPSome(a) => a
+     case FPNone => default
+   }
 
 
 
@@ -60,28 +62,28 @@ object FPOptionExamples5b extends App {
   // imports all members of the `FPOption` companion object
   import FPOption._
 
-  // val optionHello: FPOption[String] = FPSome("hello")
+  val optionHello: FPOption[String] = FPSome("hello")
 
-  // val option65: FPOption[Int] = FPSome(65)
-  // println(s"FPOption[Int] = $option65")
-  // val optionChar: FPOption[Char] = option65.map((i: Int) => i.toChar)
-  // println(s"mapped to FPOption[Char] = $optionChar")
+   val option65: FPOption[Int] = FPSome(65)
+   println(s"FPOption[Int] = $option65")
+   val optionChar: FPOption[Char] = option65.map((i: Int) => i.toChar)
+   println(s"mapped to FPOption[Char] = $optionChar")
 
-  // println("---------------------")
-  // val noInt: FPOption[Int] = FPNone
-  // println(s"FPOption[Int] = $noInt")
-  // val noChar: FPOption[Char] = noInt.map((i: Int) => i.toChar)
-  // println(s"mapped to FPOption[Char] = $noChar")
+   println("---------------------")
+   val noInt: FPOption[Int] = FPNone
+   println(s"FPOption[Int] = $noInt")
+   val noChar: FPOption[Char] = noInt.map((i: Int) => i.toChar)
+   println(s"mapped to FPOption[Char] = $noChar")
 
-  // println("---------------------")
+   println("---------------------")
 
-  // def capitalLetter(i: Int): FPOption[Char] =
-  //   if (i >= 65 && i <= 90) FPSome(i.toChar) // use unit here
-  //   else FPNone
+   def capitalLetter(i: Int): FPOption[Char] =
+     if (i >= 65 && i <= 90) FPSome(i.toChar) // use unit here
+     else FPNone
 
-  // println(s"FPOption[Int] = $noInt")
-  // val orElseSentinel = noInt.getOrElse(999)
-  // println(s"getOrElse; replaced with sentinel value: $orElseSentinel")
+   println(s"FPOption[Int] = $noInt")
+   val orElseSentinel = noInt.getOrElse(999)
+   println(s"getOrElse; replaced with sentinel value: $orElseSentinel")
 
 
   
